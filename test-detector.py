@@ -26,6 +26,8 @@ def main():
         prediction_client = CustomVisionPredictionClient(endpoint=prediction_endpoint, credentials=credentials)
 
         # Load image and get height, width and channels
+        # path = r’C:\Users\Student\miniconda3\AI-102-AIEngineer\18-object-detection\Python\test-detector\Case 1’        
+        # for image in os.listdir(path):
         
         image_file = 'IMG_2625.JPG'
         print('Detecting objects in', image_file)
