@@ -4,6 +4,8 @@ from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import os
+# import pandas as pd
+import csv  
 
 #path to file containing image file
 path = r'C:\Users\Student\miniconda3\AI-102-AIEngineer\18-object-detection\Python\test-detector\Case 1'
@@ -25,7 +27,7 @@ def main():
 
         # Load image and get height, width and channels
         
-        image_file = 'dent_test.JPG'
+        image_file = 'IMG_2625.JPG'
         print('Detecting objects in', image_file)
         image = Image.open(image_file)
         h, w, ch = np.array(image).shape
@@ -56,6 +58,17 @@ def main():
                 draw.line(points, fill=color, width=lineWidth)
                 # Add the tag name and probability
                 plt.annotate(prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100),(left,top), backgroundcolor=color)
+                header = ['box_left', 'box_top', 'height', 'width', 'volume']
+                data = [left, top, height, width, volume]
+
+                with open('dent_data.csv', 'a', encoding='UTF8') as f:
+                    writer = csv.writer(f)
+
+                    # write the header
+                    writer.writerow(header)
+
+                    # write the data
+                    writer.writerow(data)
         volume +=volume
         plt.imshow(image)
         outputfile = 'output.jpg'
